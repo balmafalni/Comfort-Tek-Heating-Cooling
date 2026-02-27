@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Comfort-Tek Heating & Cooling — HVAC services: furnace, AC, heat pumps, repairs, maintenance, installs. Call 519-562-8090." />
+  <title>Comfort-Tek Heating & Cooling | HVAC Service</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Top Notice -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span class="chip">24/7 Emergency Service</span>
+      <div class="topbar__right">
+        <a class="toplink" href="tel:15195628090" aria-label="Call Comfort-Tek">📞 519-562-8090</a>
+        <a class="toplink" href="mailto:comforttek2016@gmail.com" aria-label="Email Comfort-Tek">✉️ comforttek2016@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="Comfort-Tek Heating & Cooling home">
+        <div class="brand__mark" aria-hidden="true">CT</div>
+        <div class="brand__text">
+          <div class="brand__name">Comfort-Tek</div>
+          <div class="brand__sub">Heating & Cooling</div>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+          <span class="nav__toggleLines" aria-hidden="true"></span>
+          <span class="sr-only">Open menu</span>
+        </button>
+
+        <ul class="nav__menu" id="navMenu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why">Why Comfort-Tek</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a class="btn btn--small" href="#quote">Free Quote</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">Local • Reliable • Certified</p>
+          <h1>Fast, clean HVAC installs & repairs — done right the first time.</h1>
+          <p class="lead">
+            Comfort-Tek Heating & Cooling provides furnace, AC, heat pump, and indoor air quality service.
+            Same-day appointments when available.
+          </p>
+
+          <div class="hero__cta">
+            <a class="btn" href="tel:15195628090">Call 519-562-8090</a>
+            <a class="btn btn--ghost" href="#quote">Get a Free Quote</a>
+          </div>
+
+          <div class="hero__badges" aria-label="Highlights">
+            <div class="badge">
+              <div class="badge__title">Upfront Pricing</div>
+              <div class="badge__text">No surprises. Clear options.</div>
+            </div>
+            <div class="badge">
+              <div class="badge__title">Emergency Service</div>
+              <div class="badge__text">Support when it matters.</div>
+            </div>
+            <div class="badge">
+              <div class="badge__title">Respectful Technicians</div>
+              <div class="badge__text">Boot covers + clean finish.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__cardWrap">
+          <div class="heroCard" role="region" aria-label="Quick quote card" id="quote">
+            <div class="heroCard__top">
+              <h2>Request a Free Quote</h2>
+              <p>Tell us what you need. We’ll respond quickly.</p>
+            </div>
+
+            <form class="form" id="quoteForm">
+              <div class="form__row">
+                <label>
+                  Name
+                  <input name="name" type="text" placeholder="Your name" required />
+                </label>
+                <label>
+                  Phone
+                  <input name="phone" type="tel" placeholder="519-xxx-xxxx" required />
+                </label>
+              </div>
+
+              <label>
+                Email (optional)
+                <input name="email" type="email" placeholder="you@example.com" />
+              </label>
+
+              <label>
+                Service Needed
+                <select name="service" required>
+                  <option value="" selected disabled>Select a service</option>
+                  <option>Furnace Repair</option>
+                  <option>Furnace Installation</option>
+                  <option>Air Conditioner Repair</option>
+                  <option>Air Conditioner Installation</option>
+                  <option>Heat Pump Installation</option>
+                  <option>Maintenance / Tune-Up</option>
+                  <option>Thermostat / Smart Controls</option>
+                  <option>Indoor Air Quality</option>
+                  <option>Other</option>
+                </select>
+              </label>
+
+              <label>
+                Message
+                <textarea name="message" rows="4" placeholder="Briefly describe the issue or what you want installed." required></textarea>
+              </label>
+
+              <button class="btn btn--wide" type="submit">Send Request</button>
+
+              <p class="form__fine">
+                Prefer email? <a href="mailto:comforttek2016@gmail.com">comforttek2016@gmail.com</a>
+              </p>
+
+              <div class="form__toast" id="formToast" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+
+          <div class="hero__stats" aria-label="Service stats">
+            <div class="stat">
+              <div class="stat__num">⭐ 5.0</div>
+              <div class="stat__label">Customer satisfaction focus</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num">🛠️</div>
+              <div class="stat__label">Repair • Replace • Maintain</div>
+            </div>
+            <div class="stat">
+              <div class="stat__num">🧼</div>
+              <div class="stat__label">Clean, respectful service</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section__head">
+          <h2>HVAC Services</h2>
+          <p>Everything you need to stay comfortable year-round.</p>
+        </div>
+
+        <div class="grid3">
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">🔥</div>
+            <h3>Heating</h3>
+            <p>Furnace repair, installation, filters, diagnostics, and seasonal tune-ups.</p>
+            <ul class="card__list">
+              <li>No-heat calls</li>
+              <li>Blower & ignition issues</li>
+              <li>High-efficiency upgrades</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">❄️</div>
+            <h3>Cooling</h3>
+            <p>AC repairs, new installs, refrigerant checks, and airflow optimization.</p>
+            <ul class="card__list">
+              <li>Not cooling / icing</li>
+              <li>Thermostat problems</li>
+              <li>New central air installs</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">🌬️</div>
+            <h3>Heat Pumps & Air Quality</h3>
+            <p>Heat pump installs and IAQ solutions for cleaner, healthier air.</p>
+            <ul class="card__list">
+              <li>Heat pump sizing & install</li>
+              <li>Humidifiers & air cleaners</li>
+              <li>ERV/HRV guidance</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="ctaBar">
+          <div>
+            <h3>Need emergency service?</h3>
+            <p>Call now — we’ll do our best to help ASAP.</p>
+          </div>
+          <a class="btn" href="tel:15195628090">Call 519-562-8090</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="section section--alt" id="why">
+      <div class="container">
+        <div class="section__head">
+          <h2>Why Comfort-Tek</h2>
+          <p>Professional work, clear communication, and long-term reliability.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="panel">
+            <h3>What you can expect</h3>
+            <div class="ticks">
+              <div class="tick">✅ Straight answers and options</div>
+              <div class="tick">✅ Clean worksite + respectful service</div>
+              <div class="tick">✅ Recommendations based on your home</div>
+              <div class="tick">✅ Quality parts and workmanship</div>
+              <div class="tick">✅ Maintenance plans available</div>
+            </div>
+          </div>
+
+          <div class="panel panel--accent">
+            <h3>Service Area</h3>
+            <p class="muted">Serving homeowners and small businesses in the region.</p>
+            <div class="area">
+              <div class="area__item">• Windsor & Essex County</div>
+              <div class="area__item">• Leamington</div>
+              <div class="area__item">• Tecumseh</div>
+              <div class="area__item">• LaSalle</div>
+              <div class="area__item">• Amherstburg</div>
+            </div>
+            <p class="muted small">Not sure if you’re in range? Call and ask.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section__head">
+          <h2>What customers say</h2>
+          <p>Swap these with real reviews when you’re ready.</p>
+        </div>
+
+        <div class="grid3">
+          <figure class="review">
+            <div class="review__stars" aria-hidden="true">★★★★★</div>
+            <blockquote>“Quick response, explained the issue clearly, and the repair was solid. No mess left behind.”</blockquote>
+            <figcaption>— Local Homeowner</figcaption>
+          </figure>
+
+          <figure class="review">
+            <div class="review__stars" aria-hidden="true">★★★★★</div>
+            <blockquote>“Professional install and everything was tested before they left. House feels perfect.”</blockquote>
+            <figcaption>— Customer</figcaption>
+          </figure>
+
+          <figure class="review">
+            <div class="review__stars" aria-hidden="true">★★★★★</div>
+            <blockquote>“Honest pricing and good communication. Would use Comfort-Tek again.”</blockquote>
+            <figcaption>— Customer</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--alt" id="faq">
+      <div class="container">
+        <div class="section__head">
+          <h2>FAQ</h2>
+          <p>Common questions about HVAC repairs and installs.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Do you offer emergency or after-hours service?</summary>
+            <div class="faq__body">
+              Yes — call <a href="tel:15195628090">519-562-8090</a> and we’ll tell you the soonest available option.
+            </div>
+          </details>
+
+          <details>
+            <summary>How often should I service my furnace and AC?</summary>
+            <div class="faq__body">
+              Typically once per year for each system (heating before winter, cooling before summer).
+            </div>
+          </details>
+
+          <details>
+            <summary>Do you do heat pump installs?</summary>
+            <div class="faq__body">
+              Yes. We can advise on sizing, expected efficiency, and the best setup for your home.
+            </div>
+          </details>
+
+          <details>
+            <summary>Can I get a quote by email?</summary>
+            <div class="faq__body">
+              Yes — email <a href="mailto:comforttek2016@gmail.com">comforttek2016@gmail.com</a> or use the form above.
+            </div>
+          </details>
+        </div>
+
+        <div class="footerCta">
+          <div>
+            <h3>Ready to book?</h3>
+            <p>Call or email Comfort-Tek Heating & Cooling today.</p>
+          </div>
+          <div class="footerCta__buttons">
+            <a class="btn" href="tel:15195628090">Call Now</a>
+            <a class="btn btn--ghost" href="mailto:comforttek2016@gmail.com">Email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <div class="brand brand--footer">
+          <div class="brand__mark" aria-hidden="true">CT</div>
+          <div class="brand__text">
+            <div class="brand__name">Comfort-Tek</div>
+            <div class="brand__sub">Heating & Cooling</div>
+          </div>
+        </div>
+        <p class="muted">
+          Reliable HVAC service for heating, cooling, and indoor air quality.
+        </p>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer__list">
+          <li><a href="tel:15195628090">519-562-8090</a></li>
+          <li><a href="mailto:comforttek2016@gmail.com">comforttek2016@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer__list">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <small>© <span id="year"></span> Comfort-Tek Heating & Cooling. All rights reserved.</small>
+      <a class="toTop" href="#top" aria-label="Back to top">↑</a>
+    </div>
+  </footer>
+
+  <!-- Floating Mobile Call Button -->
+  <a class="fab" href="tel:15195628090" aria-label="Call Comfort-Tek">
+    <span aria-hidden="true">📞</span>
+    <span class="fab__text">Call</span>
+  </a>
+
+  <script src="app.js"></script>
+</body>
+</html>
