@@ -51,52 +51,48 @@
     btn.addEventListener("click", () => setActiveTab(btn));
   });
 
-// Promo carousel (robust: full-width on mobile, peek on desktop)
-const track = document.getElementById("promoTrack");
-const viewport = document.getElementById("promoViewport");
-const prev = document.getElementById("promoPrev");
-const next = document.getElementById("promoNext");
-let index = 0;
+  // Promo carousel (robust: full-width on mobile, card-width on desktop)
+  const track = document.getElementById("promoTrack");
+  const viewport = document.getElementById("promoViewport");
+  const prev = document.getElementById("promoPrev");
+  const next = document.getElementById("promoNext");
+  let index = 0;
 
-const getSlideWidth = () => {
-  if (!track || !viewport) return 0;
-  const cards = Array.from(track.children);
-  if (!cards.length) return 0;
+  const getSlideWidth = () => {
+    if (!track || !viewport) return 0;
+    const cards = Array.from(track.children);
+    if (!cards.length) return 0;
 
-  // On mobile we set flex-basis: 100% so viewport width is the correct step.
-  if (window.matchMedia("(max-width: 980px)").matches) {
-    return viewport.getBoundingClientRect().width;
-  }
+    // Mobile = full width per slide
+    if (window.matchMedia("(max-width: 980px)").matches) {
+      return viewport.getBoundingClientRect().width;
+    }
 
-  // Desktop uses card width + gap
-  const cardW = cards[0].getBoundingClientRect().width;
-  const style = getComputedStyle(track);
-  const gap = parseFloat(style.columnGap || style.gap || "12") || 12;
-  return cardW + gap;
-};
+    // Desktop = card width + gap
+    const cardW = cards[0].getBoundingClientRect().width;
+    const style = getComputedStyle(track);
+    const gap = parseFloat(style.columnGap || style.gap || "18") || 18;
+    return cardW + gap;
+  };
 
-const applySlide = () => {
-  if (!track) return;
-  const step = getSlideWidth();
-  track.style.transform = `translateX(${-step * index}px)`;
-};
+  const applySlide = () => {
+    if (!track) return;
+    const step = getSlideWidth();
+    track.style.transform = `translateX(${-step * index}px)`;
+  };
 
-const slide = (dir) => {
-  if (!track) return;
-  const cards = Array.from(track.children);
-  if (!cards.length) return;
+  const slide = (dir) => {
+    if (!track) return;
+    const cards = Array.from(track.children);
+    if (!cards.length) return;
 
-  index = (index + dir + cards.length) % cards.length;
-  applySlide();
-};
+    index = (index + dir + cards.length) % cards.length;
+    applySlide();
+  };
 
-prev?.addEventListener("click", () => slide(-1));
-next?.addEventListener("click", () => slide(1));
-
-window.addEventListener("resize", () => {
-  // keep the same index but re-calc width
-  applySlide();
-});
+  prev?.addEventListener("click", () => slide(-1));
+  next?.addEventListener("click", () => slide(1));
+  window.addEventListener("resize", applySlide);
 
   // Modal (callback)
   const modal = document.getElementById("callbackModal");
@@ -108,7 +104,6 @@ window.addEventListener("resize", () => {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    // focus first input
     setTimeout(() => modal.querySelector("input")?.focus(), 0);
   };
 

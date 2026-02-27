@@ -44,7 +44,7 @@
       </a>
 
       <nav class="nav" aria-label="Primary navigation">
-        <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" type="button">
           <span class="nav__bars" aria-hidden="true"></span>
           <span class="sr-only">Toggle menu</span>
         </button>
@@ -60,8 +60,8 @@
     </div>
   </header>
 
-  <!-- Hero -->
   <main>
+    <!-- Hero -->
     <section class="hero">
       <div class="container hero__grid">
         <div class="hero__left">
@@ -78,7 +78,7 @@
 
           <div class="hero__cta">
             <a class="btn" href="tel:15195628090">Call 519-562-8090</a>
-            <button class="btn btn--ghost" id="openCallback">Request a Callback</button>
+            <button class="btn btn--ghost" id="openCallback" type="button">Request a Callback</button>
           </div>
 
           <div class="trustStrip" aria-label="Key benefits">
@@ -143,51 +143,53 @@
               <div class="toast" id="quoteToast" role="status" aria-live="polite"></div>
             </form>
           </div>
+        </div>
+      </div>
 
-          <!-- Promo carousel (different than “two promo tiles”) -->
-          <div class="promo" aria-label="Seasonal promos">
-            <div class="promo__head">
-              <h3>Seasonal Offers</h3>
-              <div class="promo__controls">
-                <button class="iconBtn" id="promoPrev" aria-label="Previous offer">‹</button>
-                <button class="iconBtn" id="promoNext" aria-label="Next offer">›</button>
-              </div>
+      <!-- FULL-WIDTH Seasonal Offers under hero (across screen on PC) -->
+      <div class="container">
+        <div class="promo promo--full" aria-label="Seasonal promos">
+          <div class="promo__head">
+            <h3>Seasonal Offers</h3>
+            <div class="promo__controls">
+              <button class="iconBtn" id="promoPrev" aria-label="Previous offer" type="button">‹</button>
+              <button class="iconBtn" id="promoNext" aria-label="Next offer" type="button">›</button>
             </div>
-
-            <div class="promo__viewport" id="promoViewport">
-              <div class="promo__track" id="promoTrack">
-                <article class="promoCard">
-                  <div class="promoCard__tag">Limited time</div>
-                  <div class="promoCard__big">Save on</div>
-                  <div class="promoCard__title">Maintenance Visits</div>
-                  <p class="promoCard__text">Keep your system efficient before peak season.</p>
-                </article>
-
-                <article class="promoCard promoCard--alt">
-                  <div class="promoCard__tag">Bundle</div>
-                  <div class="promoCard__big">Upgrade</div>
-                  <div class="promoCard__title">Smart Thermostat</div>
-                  <p class="promoCard__text">Ask about pairing controls with new installs.</p>
-                </article>
-
-                <article class="promoCard promoCard--dark">
-                  <div class="promoCard__tag">Financing</div>
-                  <div class="promoCard__big">Options</div>
-                  <div class="promoCard__title">New Equipment</div>
-                  <p class="promoCard__text">We’ll discuss practical paths for replacement.</p>
-                </article>
-              </div>
-            </div>
-
-            <p class="promo__fine">Want exact pricing? Call <a href="tel:15195628090">519-562-8090</a>.</p>
           </div>
+
+          <div class="promo__viewport" id="promoViewport">
+            <div class="promo__track" id="promoTrack">
+              <article class="promoCard">
+                <div class="promoCard__tag">Limited time</div>
+                <div class="promoCard__big">Save on</div>
+                <div class="promoCard__title">Maintenance Visits</div>
+                <p class="promoCard__text">Keep your system efficient before peak season.</p>
+              </article>
+
+              <article class="promoCard promoCard--alt">
+                <div class="promoCard__tag">Bundle</div>
+                <div class="promoCard__big">Upgrade</div>
+                <div class="promoCard__title">Smart Thermostat</div>
+                <p class="promoCard__text">Ask about pairing controls with new installs.</p>
+              </article>
+
+              <article class="promoCard promoCard--dark">
+                <div class="promoCard__tag">Financing</div>
+                <div class="promoCard__big">Options</div>
+                <div class="promoCard__title">New Equipment</div>
+                <p class="promoCard__text">We’ll discuss practical paths for replacement.</p>
+              </article>
+            </div>
+          </div>
+
+          <p class="promo__fine">Want exact pricing? Call <a href="tel:15195628090">519-562-8090</a>.</p>
         </div>
       </div>
 
       <div class="hero__bg" aria-hidden="true"></div>
     </section>
 
-    <!-- Services (tabs instead of a flat list) -->
+    <!-- Services (tabs) -->
     <section class="section" id="services">
       <div class="container">
         <div class="section__head">
@@ -197,10 +199,10 @@
 
         <div class="tabs">
           <div class="tabs__bar" role="tablist" aria-label="Service categories">
-            <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-heating" id="tab-heating">Heating</button>
-            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-cooling" id="tab-cooling">Cooling</button>
-            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-pumps" id="tab-pumps">Heat Pumps</button>
-            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-iaq" id="tab-iaq">Air Quality</button>
+            <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-heating" id="tab-heating" type="button">Heating</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-cooling" id="tab-cooling" type="button">Cooling</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-pumps" id="tab-pumps" type="button">Heat Pumps</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="panel-iaq" id="tab-iaq" type="button">Air Quality</button>
           </div>
 
           <div class="tabs__panels">
@@ -299,7 +301,7 @@
       </div>
     </section>
 
-    <!-- How it works (different from “Why choose us” wording/layout) -->
+    <!-- How it works -->
     <section class="section section--soft" id="process">
       <div class="container">
         <div class="section__head">
@@ -441,7 +443,7 @@
             <div class="mini mini--blue">
               <div class="mini__title">Want us to call you?</div>
               <p class="mini__text">Use “Request a Callback” at the top. It takes 15 seconds.</p>
-              <button class="btn btn--ghost btn--block" id="openCallback2">Request a Callback</button>
+              <button class="btn btn--ghost btn--block" id="openCallback2" type="button">Request a Callback</button>
             </div>
           </div>
         </div>
@@ -487,7 +489,7 @@
           <div class="modal__title" id="cbTitle">Request a Callback</div>
           <div class="modal__sub">We’ll reach out as soon as possible.</div>
         </div>
-        <button class="iconBtn iconBtn--close" data-close aria-label="Close">✕</button>
+        <button class="iconBtn iconBtn--close" data-close aria-label="Close" type="button">✕</button>
       </div>
 
       <form class="form form--modal" id="callbackForm">
