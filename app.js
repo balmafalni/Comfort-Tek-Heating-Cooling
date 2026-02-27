@@ -51,30 +51,52 @@
     btn.addEventListener("click", () => setActiveTab(btn));
   });
 
-  // Promo carousel (simple)
-  const track = document.getElementById("promoTrack");
-  const viewport = document.getElementById("promoViewport");
-  const prev = document.getElementById("promoPrev");
-  const next = document.getElementById("promoNext");
-  let index = 0;
+// Promo carousel (robust: full-width on mobile, peek on desktop)
+const track = document.getElementById("promoTrack");
+const viewport = document.getElementById("promoViewport");
+const prev = document.getElementById("promoPrev");
+const next = document.getElementById("promoNext");
+let index = 0;
 
-  const slide = (dir) => {
-    if (!track || !viewport) return;
-    const cards = Array.from(track.children);
-    if (!cards.length) return;
+const getSlideWidth = () => {
+  if (!track || !viewport) return 0;
+  const cards = Array.from(track.children);
+  if (!cards.length) return 0;
 
-    index = (index + dir + cards.length) % cards.length;
+  // On mobile we set flex-basis: 100% so viewport width is the correct step.
+  if (window.matchMedia("(max-width: 980px)").matches) {
+    return viewport.getBoundingClientRect().width;
+  }
 
-    // Each card ~86% width; translate by index * (card width + gap)
-    const card = cards[0];
-    const cardW = card.getBoundingClientRect().width;
-    const gap = 12;
-    const x = (cardW + gap) * index;
-    track.style.transform = `translateX(${-x}px)`;
-  };
+  // Desktop uses card width + gap
+  const cardW = cards[0].getBoundingClientRect().width;
+  const style = getComputedStyle(track);
+  const gap = parseFloat(style.columnGap || style.gap || "12") || 12;
+  return cardW + gap;
+};
 
-  prev?.addEventListener("click", () => slide(-1));
-  next?.addEventListener("click", () => slide(1));
+const applySlide = () => {
+  if (!track) return;
+  const step = getSlideWidth();
+  track.style.transform = `translateX(${-step * index}px)`;
+};
+
+const slide = (dir) => {
+  if (!track) return;
+  const cards = Array.from(track.children);
+  if (!cards.length) return;
+
+  index = (index + dir + cards.length) % cards.length;
+  applySlide();
+};
+
+prev?.addEventListener("click", () => slide(-1));
+next?.addEventListener("click", () => slide(1));
+
+window.addEventListener("resize", () => {
+  // keep the same index but re-calc width
+  applySlide();
+});
 
   // Modal (callback)
   const modal = document.getElementById("callbackModal");

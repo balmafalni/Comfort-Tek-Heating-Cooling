@@ -292,6 +292,7 @@ a{ color: inherit; text-decoration:none; }
   background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(246,248,255,.85));
   box-shadow: 0 14px 34px rgba(14,24,55,.10);
 }
+
 .promo__head{
   display:flex; align-items:center; justify-content:space-between; gap: 12px;
   margin-bottom: 12px;
@@ -299,33 +300,39 @@ a{ color: inherit; text-decoration:none; }
 .promo__head h3{ margin:0; font-size: 16px; letter-spacing: -0.02em; }
 .promo__controls{ display:flex; gap: 10px; }
 
-.iconBtn{
-  width: 40px; height: 40px;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  background: #fff;
-  box-shadow: 0 10px 22px rgba(14,24,55,.08);
-  cursor:pointer;
-  font-weight: 900;
-  color: rgba(12,18,34,.75);
+.promo__viewport{
+  overflow:hidden;
+  border-radius: 18px;
+  width: 100%;
 }
-.iconBtn:active{ transform: translateY(1px); }
-.iconBtn--close{ width: 42px; height: 42px; }
 
-.promo__viewport{ overflow:hidden; border-radius: 18px; }
 .promo__track{
   display:flex;
   gap: 12px;
   transform: translateX(0);
   transition: transform .25s ease;
+  will-change: transform;
 }
+
+/* Desktop/tablet: keep the “peek” style */
 .promoCard{
-  min-width: 86%;
+  flex: 0 0 86%;
   padding: 16px;
   border-radius: 18px;
   border: 1px solid rgba(11,95,255,.20);
   background: linear-gradient(135deg, rgba(11,95,255,.10), rgba(0,179,255,.10));
 }
+
+/* On phone: each offer becomes FULL WIDTH */
+@media (max-width: 980px){
+  .promo{ padding: 14px; }
+  .promo__track{ gap: 0; }
+  .promoCard{
+    flex: 0 0 100%;
+    border-radius: 18px;
+  }
+}
+
 .promoCard--alt{
   border-color: rgba(22,163,74,.20);
   background: linear-gradient(135deg, rgba(22,163,74,.10), rgba(11,95,255,.08));
@@ -701,4 +708,41 @@ summary{
   .nav__menu a{ padding: 10px 12px; border-radius: 14px; }
   .nav__menu a:hover{ background: rgba(246,248,255,.9); }
   .form__row{ grid-template-columns: 1fr; }
+}
+
+/* --- Mobile overflow + ribbon/header fixes --- */
+body { overflow-x: hidden; }
+* { min-width: 0; } /* prevents flex children from forcing overflow */
+
+.ribbon__right,
+.ribbon__left{
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.ribbon__link{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Make the top ribbon stack neatly on phones */
+@media (max-width: 560px){
+  .ribbon__inner{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ribbon__right{
+    justify-content: flex-start;
+  }
+  .dot{ display:none; }
+}
+
+/* Keep hero headline readable & prevent weird clipping on very small devices */
+.hero h1{
+  overflow-wrap: anywhere;
+}
+
+/* Ensure CTA buttons don’t overflow */
+.hero__cta .btn{
+  flex: 1 1 auto;
 }
