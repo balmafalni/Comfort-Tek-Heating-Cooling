@@ -1,81 +1,186 @@
 (() => {
+  // Year
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   // Mobile nav
-  const toggle = document.getElementById("navToggle");
-  const menu = document.getElementById("navMenu");
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
 
-  if (toggle && menu) {
-    const closeMenu = () => {
-      menu.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    };
-
-    toggle.addEventListener("click", () => {
-      const isOpen = menu.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    // Close on link click
-    menu.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => closeMenu());
-    });
-
-    // Close on outside click
-    document.addEventListener("click", (e) => {
-      const target = e.target;
-      if (!target) return;
-      const clickedInside = menu.contains(target) || toggle.contains(target);
-      if (!clickedInside) closeMenu();
-    });
-
-    // Close on Escape
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
-  }
-
-  // Quote form: lightweight handling (mailto fallback)
-  const form = document.getElementById("quoteForm");
-  const toast = document.getElementById("formToast");
-
-  const showToast = (msg) => {
-    if (!toast) return;
-    toast.textContent = msg;
+  const closeNav = () => {
+    if (!navMenu || !navToggle) return;
+    navMenu.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
   };
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+  if (navToggle && navMenu) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
 
-      const data = new FormData(form);
-      const name = String(data.get("name") || "").trim();
-      const phone = String(data.get("phone") || "").trim();
-      const email = String(data.get("email") || "").trim();
-      const service = String(data.get("service") || "").trim();
-      const message = String(data.get("message") || "").trim();
+    navMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeNav));
 
-      if (!name || !phone || !service || !message) {
-        showToast("Please fill in the required fields.");
-        return;
-      }
+    document.addEventListener("click", (e) => {
+      const t = e.target;
+      if (!t) return;
+      if (!navMenu.contains(t) && !navToggle.contains(t)) closeNav();
+    });
 
-      // Mailto (works on most devices; for a real backend you’d connect a form endpoint)
-      const subject = encodeURIComponent(`Comfort-Tek Quote Request — ${service}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\nPhone: ${phone}\nEmail: ${email || "N/A"}\nService: ${service}\n\nMessage:\n${message}\n`
-      );
-
-      const mailto = `mailto:comforttek2016@gmail.com?subject=${subject}&body=${body}`;
-
-      showToast("Opening your email app… If it doesn’t open, copy your message and email us directly.");
-      window.location.href = mailto;
-
-      // Reset after a moment
-      setTimeout(() => {
-        form.reset();
-      }, 600);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeNav();
     });
   }
+
+  // Tabs
+  const tabButtons = Array.from(document.querySelectorAll(".tab"));
+  const panels = Array.from(document.querySelectorAll(".panel"));
+
+  const setActiveTab = (btn) => {
+    tabButtons.forEach(b => {
+      const active = b === btn;
+      b.classList.toggle("is-active", active);
+      b.setAttribute("aria-selected", String(active));
+    });
+
+    const id = btn.getAttribute("aria-controls");
+    panels.forEach(p => p.classList.toggle("is-active", p.id === id));
+  };
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => setActiveTab(btn));
+  });
+
+  // Promo carousel (simple)
+  const track = document.getElementById("promoTrack");
+  const viewport = document.getElementById("promoViewport");
+  const prev = document.getElementById("promoPrev");
+  const next = document.getElementById("promoNext");
+  let index = 0;
+
+  const slide = (dir) => {
+    if (!track || !viewport) return;
+    const cards = Array.from(track.children);
+    if (!cards.length) return;
+
+    index = (index + dir + cards.length) % cards.length;
+
+    // Each card ~86% width; translate by index * (card width + gap)
+    const card = cards[0];
+    const cardW = card.getBoundingClientRect().width;
+    const gap = 12;
+    const x = (cardW + gap) * index;
+    track.style.transform = `translateX(${-x}px)`;
+  };
+
+  prev?.addEventListener("click", () => slide(-1));
+  next?.addEventListener("click", () => slide(1));
+
+  // Modal (callback)
+  const modal = document.getElementById("callbackModal");
+  const open1 = document.getElementById("openCallback");
+  const open2 = document.getElementById("openCallback2");
+
+  const openModal = () => {
+    if (!modal) return;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    // focus first input
+    setTimeout(() => modal.querySelector("input")?.focus(), 0);
+  };
+
+  const closeModal = () => {
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  open1?.addEventListener("click", openModal);
+  open2?.addEventListener("click", openModal);
+
+  modal?.addEventListener("click", (e) => {
+    const t = e.target;
+    if (!t) return;
+    if (t.hasAttribute("data-close")) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Forms -> mailto (simple, no backend)
+  const quoteForm = document.getElementById("quoteForm");
+  const quoteToast = document.getElementById("quoteToast");
+
+  const cbForm = document.getElementById("callbackForm");
+  const cbToast = document.getElementById("cbToast");
+
+  const toast = (el, msg) => { if (el) el.textContent = msg; };
+
+  const openMail = ({ subject, body }) => {
+    const s = encodeURIComponent(subject);
+    const b = encodeURIComponent(body);
+    window.location.href = `mailto:comforttek2016@gmail.com?subject=${s}&body=${b}`;
+  };
+
+  quoteForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(quoteForm);
+
+    const name = String(data.get("name") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const service = String(data.get("service") || "").trim();
+    const message = String(data.get("message") || "").trim();
+
+    if (!name || !phone || !service || !message) {
+      toast(quoteToast, "Please fill all required fields.");
+      return;
+    }
+
+    toast(quoteToast, "Opening your email app…");
+    openMail({
+      subject: `Comfort-Tek Quote Request — ${service}`,
+      body:
+`Name: ${name}
+Phone: ${phone}
+Service: ${service}
+
+Message:
+${message}
+`
+    });
+
+    setTimeout(() => quoteForm.reset(), 600);
+  });
+
+  cbForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(cbForm);
+
+    const name = String(data.get("name") || "").trim();
+    const phone = String(data.get("phone") || "").trim();
+    const time = String(data.get("time") || "").trim();
+
+    if (!name || !phone || !time) {
+      toast(cbToast, "Please fill all required fields.");
+      return;
+    }
+
+    toast(cbToast, "Opening your email app…");
+    openMail({
+      subject: `Comfort-Tek Callback Request`,
+      body:
+`Name: ${name}
+Phone: ${phone}
+Best time to call: ${time}
+`
+    });
+
+    setTimeout(() => {
+      cbForm.reset();
+      closeModal();
+    }, 700);
+  });
 })();
